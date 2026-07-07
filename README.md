@@ -1,4 +1,4 @@
-#SWGOH Arena Tracker
+# SWGOH Arena Tracker
 
 This repository now runs as a Render web service. The container starts the tracker process, exposes a lightweight HTTP listener, and pings its own health endpoint every 7 minutes so Render does not retire the service for being idle.
 
@@ -14,6 +14,7 @@ Set these environment variables in Render:
 | ALLY_CODES_URL | URL to a JSON file with players | Recommended for hosted setups |
 | PORT | Port for the HTTP listener | Render provides this automatically |
 | KEEPALIVE_INTERVAL | Seconds between self-pings | Defaults to `420` (7 minutes) |
+| KEEPALIVE_URL | URL to ping to keep service active | Defaults to local `/`; set to your Render public URL for reliable wake-ups |
 
 ## Deploy to Render
 
@@ -23,7 +24,9 @@ Set these environment variables in Render:
 4. Add the required environment variables above.
 5. Deploy the service and verify that `/healthz` returns a healthy response.
 
-The service listens on the port provided by Render and keeps itself alive by hitting `/healthz` every 7 minutes.
+The service listens on the port provided by Render and keeps itself alive by hitting the configured `KEEPALIVE_URL` every 7 minutes.
+
+Set `KEEPALIVE_URL=https://swgoh-tracker-ulw0.onrender.com/` in Render for the external wake-up behavior.
 
 ## Notes
 
