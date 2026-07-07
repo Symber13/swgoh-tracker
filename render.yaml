@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: swgoh-arena-tracker
+    env: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: KEEPALIVE_INTERVAL
+        value: 420
