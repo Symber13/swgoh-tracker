@@ -1,4 +1,4 @@
-# SWGOH Arena Tracker
+
 
 This repository now runs as a Render web service. The container starts the tracker process, exposes a lightweight HTTP listener, and pings its own health endpoint every 7 minutes so Render does not retire the service for being idle.
 
