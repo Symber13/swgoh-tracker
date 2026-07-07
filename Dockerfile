@@ -5,8 +5,7 @@ RUN apk add --no-cache python3
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ENV PORT=8080 \
-    KEEPALIVE_INTERVAL=420
+ENV PORT=8080
 
 EXPOSE 8080
 

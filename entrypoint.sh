@@ -2,8 +2,6 @@
 set -eu
 
 PORT="${PORT:-8080}"
-KEEPALIVE_INTERVAL="${KEEPALIVE_INTERVAL:-420}"
-KEEPALIVE_URL="${KEEPALIVE_URL:-http://127.0.0.1:${PORT}/}"
 tracker_pid=""
 
 mkdir -p /app/www
@@ -31,23 +29,7 @@ cleanup() {
 }
 trap cleanup TERM INT
 
-keepalive_request() {
-  if command -v wget >/dev/null 2>&1; then
-    wget -q -T 10 -O /dev/null "$KEEPALIVE_URL"
-  else
-    python3 -c "import urllib.request,sys; urllib.request.urlopen('$KEEPALIVE_URL', timeout=10).read(); sys.exit(0)" >/dev/null 2>&1
-  fi
-}
-
 start_tracker
-
-(
-  while true; do
-    keepalive_request >/dev/null 2>&1 || true
-    sleep "$KEEPALIVE_INTERVAL"
-  done
-) &
-keepalive_pid=$!
 
 while true; do
   if ! kill -0 "$httpd_pid" 2>/dev/null; then
