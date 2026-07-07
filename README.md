@@ -26,7 +26,7 @@ Set these environment variables in Render:
 
 The service listens on the port provided by Render and keeps itself alive by hitting the configured `KEEPALIVE_URL` every 7 minutes.
 
-Set `KEEPALIVE_URL=https://swgoh-tracker-ulw0.onrender.com/` in Render for the external wake-up behavior.
+Set `KEEPALIVE_URL=<yourURL.render.com>` in Render for the external wake-up behavior.
 
 ## Notes
 
